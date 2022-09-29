@@ -22,13 +22,13 @@ from py_fumen.page import Page
 
 pages = []
 pages.append(
-    field=create_inner_field(Field.create(
+    Page(field=create_inner_field(Field.create(
         'LLL_____SS' +
         'LOO____SST' +
         'JOO___ZZTT' +
         'JJJ____ZZT',
         '__________',
-    )),
+    ))),
     comment='Perfect Clear Opener')
 
 print(encode(pages))
