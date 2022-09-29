@@ -21,7 +21,7 @@ from py_fumen.field import Field, create_inner_field
 from py_fumen.page import Page
 
 pages = []
-pages.append({
+pages.append(
     create_inner_field(Field.create(
         'LLL_____SS' +
         'LOO____SST' +
@@ -29,8 +29,7 @@ pages.append({
         'JJJ____ZZT',
         'XXXXXXXXX_',
     )),
-    comment: 'Perfect Clear Opener',
-})
+    comment: 'Perfect Clear Opener')
 
 print(encode(pages))
 ```
