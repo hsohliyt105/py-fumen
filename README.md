@@ -22,14 +22,14 @@ from py_fumen.page import Page
 
 pages = []
 pages.append(
-    create_inner_field(Field.create(
+    field=create_inner_field(Field.create(
         'LLL_____SS' +
         'LOO____SST' +
         'JOO___ZZTT' +
         'JJJ____ZZT',
-        'XXXXXXXXX_',
+        '__________',
     )),
-    comment: 'Perfect Clear Opener')
+    comment='Perfect Clear Opener')
 
 print(encode(pages))
 ```
