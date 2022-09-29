@@ -6,8 +6,8 @@ from typing import List, Optional
 from math import floor
 from copy import deepcopy
 
-from defines import InnerOperation, parse_piece, Piece, Rotation
-from constants import FieldConstants
+from .defines import InnerOperation, parse_piece, Piece, Rotation
+from .constants import FieldConstants
 
 class PieceException(Exception):
     pass

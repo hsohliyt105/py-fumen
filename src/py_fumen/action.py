@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from math import floor
 from typing import Tuple
 
-from defines import is_mino_piece, InnerOperation, Piece, Rotation
-from constants import FieldConstants
+from .defines import is_mino_piece, InnerOperation, Piece, Rotation
+from .constants import FieldConstants
 
 @dataclass
 class Action():

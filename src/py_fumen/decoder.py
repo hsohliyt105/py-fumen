@@ -5,15 +5,15 @@ from typing import List, Optional, Tuple
 from math import floor
 from urllib.parse import unquote
 
-from page import Page, Flags, Refs
-from inner_field import InnerField
-from fumen_buffer import FumenBuffer
-from defines import is_mino_piece, parse_piece_name, parse_rotation_name, Piece
-from action import ActionDecoder
-from comments import CommentParser
-from quiz import Quiz
-from field import create_new_inner_field, Mino, Operation
-from constants import FieldConstants
+from .page import Page, Flags, Refs
+from .inner_field import InnerField
+from .fumen_buffer import FumenBuffer
+from .defines import is_mino_piece, parse_piece_name, parse_rotation_name, Piece
+from .action import ActionDecoder
+from .comments import CommentParser
+from .quiz import Quiz
+from .field import create_new_inner_field, Mino, Operation
+from .constants import FieldConstants
 
 class VersionException(Exception):
     pass

@@ -3,8 +3,9 @@
 from __future__ import annotations
 from enum import Enum
 from typing import List, Optional
-from defines import parse_piece, parse_piece_name, Piece
 from re import search
+
+from .defines import parse_piece, parse_piece_name, Piece
 
 class Operation(Enum):
     DIRECT = 'direct'

@@ -5,8 +5,8 @@ from typing import List, Optional, Tuple
 from math import floor
 from urllib.parse import unquote
 
-from inner_field import InnerField
-from field import Field, Mino, Operation, create_inner_field
+from .inner_field import InnerField
+from .field import Field, Mino, Operation, create_inner_field
 
 @dataclass
 class Flags():

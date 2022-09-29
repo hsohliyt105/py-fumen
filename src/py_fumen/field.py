@@ -4,9 +4,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
-from inner_field import get_block_xys, InnerField, PlayField
-from defines import parse_piece, parse_piece_name, parse_rotation
-from constants import FieldConstants
+from .inner_field import get_block_xys, InnerField, PlayField
+from .defines import parse_piece, parse_piece_name, parse_rotation
+from .constants import FieldConstants
 
 @dataclass
 class Operation():

@@ -4,15 +4,15 @@ from typing import List, Optional, Tuple
 from urllib.parse import quote
 from re import findall
 
-from page import Page, Flags
-from inner_field import InnerField
-from fumen_buffer import FumenBuffer
-from field import create_inner_field, create_new_inner_field, Field, Operation
-from defines import is_mino_piece, parse_piece, parse_rotation, Piece, Rotation, InnerOperation
-from action import ActionEncoder, Action
-from comments import CommentParser
-from quiz import Quiz
-from constants import FieldConstants, VERSION_INFO
+from .page import Page, Flags
+from .inner_field import InnerField
+from .fumen_buffer import FumenBuffer
+from .field import create_inner_field, create_new_inner_field, Field, Operation
+from .defines import is_mino_piece, parse_piece, parse_rotation, Piece, Rotation, InnerOperation
+from .action import ActionEncoder, Action
+from .comments import CommentParser
+from .quiz import Quiz
+from .constants import FieldConstants, VERSION_INFO
 
 # Calculate difference from previous field: 0 to 16
 def get_diff(prev: InnerField, current: InnerField, x_index: int, y_index: int) -> int:
