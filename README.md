@@ -28,8 +28,8 @@ pages.append(
         'JOO___ZZTT' +
         'JJJ____ZZT',
         '__________',
-    ))),
-    comment='Perfect Clear Opener')
+    )),
+    comment='Perfect Clear Opener'))
 
 print(encode(pages))
 ```
