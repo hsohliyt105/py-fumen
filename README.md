@@ -39,6 +39,7 @@ print(encode(pages))
 In command prompt or terminal or equivalent, run 
 ```
 pip install py-fumen
+```
 
 # Difference between the knewjade's fumen
 Some of functions and variables are non-private because of the disparity between python and typescript (e.g. quiz variable in the Quiz class).
