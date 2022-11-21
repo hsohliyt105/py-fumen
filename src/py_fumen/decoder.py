@@ -3,7 +3,6 @@
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 from math import floor
-from urllib.parse import unquote
 
 from .page import Page, Flags, Refs
 from .inner_field import InnerField
@@ -14,6 +13,7 @@ from .comments import CommentParser
 from .quiz import Quiz
 from .field import create_new_inner_field, Mino, Operation
 from .constants import FieldConstants
+from .js_escape import unescape
 
 class VersionException(Exception):
     pass
@@ -142,7 +142,8 @@ def inner_decode(data: str, field_top: int) -> List[Page]:
             for value in comment_values:
                 flatten += CommentParser.decode(value)
 
-            comment_text = unquote(flatten[0:comment_length])
+            #this is the problem. javascript escape vs python quote
+            comment_text = unescape(flatten[0:comment_length])
             store.last_comment_text = comment_text
             comment = Comment(text=comment_text)
             store.ref_index.comment = page_index

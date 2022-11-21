@@ -13,6 +13,7 @@ from .action import ActionEncoder, Action
 from .comments import CommentParser
 from .quiz import Quiz
 from .constants import FieldConstants, VERSION_INFO
+from .js_escape import escape
 
 # Calculate difference from previous field: 0 to 16
 def get_diff(prev: InnerField, current: InnerField, x_index: int, y_index: int) -> int:
@@ -159,7 +160,7 @@ def encode(pages: List[Page]) -> str:
 
         # Comment update
         if next_comment is not None:
-            comment: str = quote(current_page.comment)
+            comment: str = escape(current_page.comment)
             comment_length = min(len(comment), 4095)
 
             fumen_buffer.push(comment_length, 2)
