@@ -7,3 +7,4 @@ from .field import *
 from .quiz import *
 from .action import *
 from .defines import *
+from .inner_field import *
