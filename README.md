@@ -49,6 +49,8 @@ create_inner_field function and create_new_inner_field are moved to field.py bec
 
 page.py is created for better OOP.
 
+js_escape.py is added to imitate javascript's escape/unescape.
+
 buffer.ts is renamed to fumen_buffer.py and Buffer object to FumenBuffer.
 
 getters and setters are changed into methods (e.g. Page.get_field()). 
