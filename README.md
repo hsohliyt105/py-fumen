@@ -1,6 +1,9 @@
 # py-fumen
 Python implementation of knewjade's fumen
 
+# Installation 
+pip install py-fumen
+
 # Uses
 The usage of this package is very similar to the original fumen package.
 
