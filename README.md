@@ -2,7 +2,7 @@
 Python implementation of knewjade's fumen
 
 # Installation 
-`pip install py-fumen`
+Enter `pip install py-fumen` in terminal / cmd if you have python3 already.
 
 # Uses
 The usage of this package is very similar to the original fumen package.
