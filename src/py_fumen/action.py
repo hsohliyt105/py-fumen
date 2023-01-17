@@ -23,11 +23,15 @@ class ActionDecoder() :
     width: int
     field_top: int
     garbage_line: int
+    field_max_height: int
+    num_field_blocks: int
 
     def __init__(self, width: int, field_top: int, garbage_line: int):
         self.width = width
         self.field_top = field_top
         self.garbage_line = garbage_line
+        self.field_max_height = field_top + garbage_line
+        self.num_field_blocks = self.field_max_height * width
 
     class PieceException(Exception):
         pass
@@ -77,13 +81,15 @@ class ActionDecoder() :
         return (x, y)
 
     def decode(self, v: int) -> Action:
+        print(v)
+
         value = v
         piece_type = self.decode_piece(value % 8)
         value = floor(value / 8)
         rotation = self.decode_rotation(value % 4)
         value = floor(value / 4)
-        coordinate = self.decode_coordinate(value % FieldConstants.MAX_BLOCKS, piece_type, rotation)
-        value = floor(value / FieldConstants.MAX_BLOCKS)
+        coordinate = self.decode_coordinate(value % self.num_field_blocks, piece_type, rotation)
+        value = floor(value / self.num_field_blocks)
         is_block_up = decode_bool(value % 2)
         value = floor(value / 2)
         is_mirror = decode_bool(value % 2)
@@ -174,7 +180,7 @@ class ActionEncoder():
         value += encode_bool(action.mirror)
         value *= 2
         value += encode_bool(action.rise)
-        value *= FieldConstants.MAX_BLOCKS
+        value *= self.num_field_blocks
         value += self.encode_position(action.piece)
         value *= 4
         value += self.encode_rotation(action.piece)

@@ -144,7 +144,7 @@ class PlayField():
         self.__pieces = new_field
 
     def up(self, block_up: PlayField):
-        self.__pieces = (block_up.pieces + (self.__pieces))[0, self.__length]
+        self.__pieces = (block_up.__pieces + (self.__pieces))[0:self.__length]
 
     def mirror(self):
         new_field: List[Piece] = []
@@ -195,11 +195,11 @@ class PlayField():
         self.__pieces = [Piece.EMPTY] * len(self.__pieces)
 
     def equals(self, other: PlayField) -> bool:
-        if len(self.__pieces) != len(other.pieces):
+        if len(self.__pieces) != len(other.__pieces):
             return False
 
         for index in range(len(self.__pieces)):
-            if self.__pieces[index] != other.pieces[index]:
+            if self.__pieces[index] != other.__pieces[index]:
                 return False
 
         return True
