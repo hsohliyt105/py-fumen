@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import annotations
-from enum import Enum
+from enum import IntEnum
 from typing import List, Optional
 from re import search
 
 from .defines import parse_piece, parse_piece_name, Piece
 
-class Operation(Enum):
+class Operation(IntEnum):
     DIRECT = 'direct'
     SWAP = 'swap'
     STOCK = 'stock'
