@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from dataclasses import dataclass
-from enum import Enum
+from enum import IntEnum
 
-class Piece(Enum):
+class Piece(IntEnum):
     EMPTY = 0
     I = 1 # Illegal naming convention but just followed knewjade
     L = 2
@@ -55,7 +55,7 @@ def parse_piece(piece: str) -> Piece:
 
     raise PieceException(f'Unknown piece: {piece}')
 
-class Rotation(Enum):
+class Rotation(IntEnum):
     SPAWN = 2
     RIGHT = 1
     REVERSE = 0
