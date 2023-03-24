@@ -14,7 +14,7 @@ class Operation(IntEnum):
 
 class Quiz():
     quiz: str
-    
+
     @staticmethod
     def trim(quiz: str) -> str:
         return quiz.strip()
@@ -29,7 +29,7 @@ class Quiz():
         if len(replaced) == 0 or quiz == '#Q=[]()' or not quiz.startswith('#Q='):
             return quiz
 
-        if not(search("^#Q=\[[TIOSZJL]?]\([TIOSZJL]?\)[TIOSZJL]*?.*$", replaced)):
+        if not(search("^#Q=\[[TIOSZJL]?]\([TIOSZJL]?\)[TIOSZJL]*;?.*$", replaced)):
             raise Quiz.PieceException(f"Current piece doesn't exist, however next pieces exist: {quiz}")
 
         return replaced
@@ -41,7 +41,7 @@ class Quiz():
         index = self.quiz.index(')') + 1
         name = self.quiz[index:]
 
-        if name is None or name == '':
+        if name is None or name == ';':
             return ''
 
         return name
@@ -80,7 +80,7 @@ class Quiz():
 
     def least_after_next2(self) -> str:
         index = self.quiz.index(')')
-        if self.quiz[index+1] == '':
+        if self.quiz[index+1] == ';':
             return self.quiz[index+1:]
 
         return self.quiz.substr[index+2:]
@@ -161,7 +161,7 @@ class Quiz():
 
     def can_operate(self) -> bool:
         quiz = self.quiz
-        if quiz.startswith('#Q=[]()'):
+        if quiz.startswith('#Q=[]();'):
             quiz = self.quiz[8:]
 
         return quiz.startswith('#Q=') and quiz != '#Q=[]()'
@@ -185,13 +185,13 @@ class Quiz():
         if maximum is not None and len(names) < maximum:
             names += ' ' * (maximum - len(names))
 
-        return [Piece.EMPTY if name is None or name == ' ' or name == '' else parse_piece_name(name) for name in [*names]]
+        return [Piece.EMPTY if name is None or name == ' ' or name == ';' else parse_piece_name(name) for name in [*names]]
 
     def to_string(self) -> str:
         return self.quiz
 
     def next_if_end(self) -> Quiz:
-        if self.quiz.startswith('#Q=[]()'):
+        if self.quiz.startswith('#Q=[]();'):
             return Quiz(self.quiz[8:])
 
         return self
@@ -213,7 +213,7 @@ class Quiz():
             if head is None:
                 return Quiz('')
 
-            if head == '':
+            if head == ';':
                 return Quiz(least[1:])
 
             return Quiz(f"#Q=[]({head}){least[1:]}")
