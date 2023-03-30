@@ -55,7 +55,7 @@ class Quiz():
         return Quiz(f"#Q=[]({nexts[0]}){nexts[1:]}")
 
     @staticmethod
-    def create(hold: str, nexts: str) -> Quiz:        
+    def create(hold: str, nexts: str) -> Quiz:
         return Quiz(f"#Q=[{hold}]({nexts[0]}){nexts[1:]}")
 
     def least(self) -> str:
@@ -83,7 +83,7 @@ class Quiz():
         if self.quiz[index+1] == ';':
             return self.quiz[index+1:]
 
-        return self.quiz.substr[index+2:]
+        return self.quiz[index+2:]
 
     class HoldException(Exception):
         pass
@@ -97,7 +97,7 @@ class Quiz():
         hold = self.hold()
         if used_name == hold:
             return Operation.SWAP
-        
+
         if hold == '':
             if used_name == self.next():
                 return Operation.STOCK
@@ -115,7 +115,7 @@ class Quiz():
         if quiz[index+1] == ';':
             return quiz[index+1:]
 
-        return quiz.substr[index+2:]
+        return quiz[index+2:]
 
     def direct(self) -> Quiz:
         if self.current() == '':
@@ -156,7 +156,7 @@ class Quiz():
             return self.swap()
         if operation is  Operation.STOCK:
             return self.stock()
-        
+
         raise self.OperationException('Unexpected operation')
 
     def can_operate(self) -> bool:
@@ -173,13 +173,12 @@ class Quiz():
         name = self.hold()
         if name is None or name == '' or name == ';':
             return Piece.EMPTY
-        
+
         return parse_piece(name)
 
     def get_next_pieces(self, maximum: Optional[int] = None) -> List[Piece]:
         if not self.can_operate():
             return [Piece.EMPTY] * maximum if maximum is not None else []
-        
 
         names = self.current() + self.next() + self.least_in_active_bag()[0, maximum]
         if maximum is not None and len(names) < maximum:
