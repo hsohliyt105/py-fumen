@@ -83,7 +83,7 @@ class Quiz():
         if self.quiz[index+1] == ';':
             return self.quiz[index+1:]
 
-        return self.quiz.substr[index+2:]
+        return self.quiz[index+2:]
 
     class HoldException(Exception):
         pass
@@ -115,7 +115,7 @@ class Quiz():
         if quiz[index+1] == ';':
             return quiz[index+1:]
 
-        return quiz.substr[index+2:]
+        return quiz[index+2:]
 
     def direct(self) -> Quiz:
         if self.current() == '':
