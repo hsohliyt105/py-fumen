@@ -188,7 +188,7 @@ class Quiz():
         return self.quiz
 
     def next_if_end(self) -> Quiz:
-        if self.quiz.startswith('#Q=[]()'):
+        if self.quiz.startswith('#Q=[]();'):
             return Quiz(self.quiz[8:])
 
         return self
