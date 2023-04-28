@@ -38,8 +38,8 @@ class Quiz():
         self.quiz = self.__verify(quiz)
 
     def next(self) -> str:
-        index = self.quiz.index(')') + 1
-        name = self.quiz[index:]
+        index = self.quiz.find(')') + 1
+        name = self.quiz[index]
 
         if name is None or name == ';':
             return ''
@@ -51,19 +51,17 @@ class Quiz():
         return comment.startswith('#Q=')
 
     @staticmethod
-    def create(nexts: str) -> Quiz:
-        return Quiz(f"#Q=[]({nexts[0]}){nexts[1:]}")
-
-    @staticmethod
-    def create(hold: str, nexts: str) -> Quiz:        
-        return Quiz(f"#Q=[{hold}]({nexts[0]}){nexts[1:]}")
+    def create(first: str, second: Optional[str]=None) -> Quiz:
+        if second is None:
+            return Quiz(f"#Q=[]({first[0]}){first[1:]}")
+        return Quiz(f"#Q=[{first}]({second[0]}){second[1:]}")
 
     def least(self) -> str:
-        index = self.quiz.index(')')
+        index = self.quiz.find(')')
         return self.quiz[index+1:]
 
     def current(self) -> str:
-        index = self.quiz.index('(') + 1
+        index = self.quiz.find('(') + 1
         name = self.quiz[index]
         if name == ')':
             return ''
@@ -71,7 +69,7 @@ class Quiz():
         return name
 
     def hold(self) -> str:
-        index = self.quiz.index('[') + 1
+        index = self.quiz.find('[') + 1
         name = self.quiz[index]
         if name == ']':
             return ''
@@ -79,7 +77,7 @@ class Quiz():
         return name
 
     def least_after_next2(self) -> str:
-        index = self.quiz.index(')')
+        index = self.quiz.find(')')
         if self.quiz[index+1] == ';':
             return self.quiz[index+1:]
 
@@ -97,7 +95,7 @@ class Quiz():
         hold = self.hold()
         if used_name == hold:
             return Operation.SWAP
-        
+
         if hold == '':
             if used_name == self.next():
                 return Operation.STOCK
@@ -109,9 +107,9 @@ class Quiz():
         raise self.HoldException(f"Unexpected hold piece in quiz: {self.quiz}")
 
     def least_in_active_bag(self) -> str:
-        separate_index = self.quiz.index(';')
-        quiz = self.quiz[0, separate_index] if 0 <= separate_index else self.quiz
-        index = quiz.indexOf(')')
+        separate_index = self.quiz.find(';')
+        quiz = self.quiz[0:separate_index] if 0 <= separate_index else self.quiz
+        index = quiz.find(')')
         if quiz[index+1] == ';':
             return quiz[index+1:]
 
@@ -122,14 +120,14 @@ class Quiz():
             least = self.least_after_next2()
             return Quiz(f"#Q=[{self.hold()}]({least[0]}){least[1:]}")
 
-        return Quiz("#Q=[{self.hold}](${self.next()})${self.leastAfterNext2()}")
+        return Quiz(f"#Q=[{self.hold()}]({self.next()}){self.least_after_next2()}")
 
     def swap(self) -> Quiz:
         if self.hold() == '':
             raise self.HoldException(f"Cannot find hold piece: {self.quiz}")
 
         next = self.next()
-        return Quiz(f"#Q=[${self.current()}]({next})${self.leastAfterNext2()}")
+        return Quiz(f"#Q=[{self.current()}]({next}){self.least_after_next2()}")
 
     class StockException(Exception):
         pass
@@ -138,7 +136,7 @@ class Quiz():
         if self.hold() != '' or self.next() == '':
              raise self.StockException(f"Cannot stock: {self.quiz}")
 
-        least = self.leastAfterNext2()
+        least = self.least_after_next2()
         head = least[0] if least[0] is not None else ''
 
         if 1 < len(least):
@@ -156,7 +154,7 @@ class Quiz():
             return self.swap()
         if operation is  Operation.STOCK:
             return self.stock()
-        
+
         raise self.OperationException('Unexpected operation')
 
     def can_operate(self) -> bool:
@@ -173,15 +171,14 @@ class Quiz():
         name = self.hold()
         if name is None or name == '' or name == ';':
             return Piece.EMPTY
-        
+
         return parse_piece(name)
 
     def get_next_pieces(self, maximum: Optional[int] = None) -> List[Piece]:
         if not self.can_operate():
             return [Piece.EMPTY] * maximum if maximum is not None else []
-        
 
-        names = self.current() + self.next() + self.least_in_active_bag()[0, maximum]
+        names = (self.current() + self.next() + self.least_in_active_bag())[0:maximum]
         if maximum is not None and len(names) < maximum:
             names += ' ' * (maximum - len(names))
 
