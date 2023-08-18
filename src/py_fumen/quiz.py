@@ -7,7 +7,7 @@ from re import search
 
 from .defines import parse_piece, parse_piece_name, Piece
 
-class Operation(IntEnum):
+class Operation(Enum):
     DIRECT = 'direct'
     SWAP = 'swap'
     STOCK = 'stock'
