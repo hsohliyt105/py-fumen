@@ -36,7 +36,7 @@ class Mino():
         return xy.y, xy.x
 
     def positions(self) -> List[XY]:
-        return get_block_xys(parse_piece(self.piece_type), parse_rotation(self.rotation), self.x, self.y).sort(key=self.get_sort_xy)
+        return sorted(get_block_xys(parse_piece(self.piece_type), parse_rotation(self.rotation), self.x, self.y), key=self.get_sort_xy)
 
     def operation(self) -> Operation:
         return Operation(self.piece_type, self.rotation, self.x, self.y)
