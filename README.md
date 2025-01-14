@@ -9,7 +9,7 @@ The usage of this package is very similar to the original fumen package.
 
 ## Decode
 ```
-from py_fumen.decoder import decode
+from py_fumen import decode
 
 decode_pages = decode("v115@vhHJEJWPJyKJz/I1QJUNJvIJAgH")
 
@@ -19,9 +19,7 @@ for page in decode_pages:
 
 ## Encode
 ```
-from py_fumen.encoder import encode
-from py_fumen.field import Field, create_inner_field
-from py_fumen.page import Page
+from py_fumen import Field, Page, encode, create_inner_field
 
 pages = []
 pages.append(
